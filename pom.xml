@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!--
 
     Copyright (C) 2014-2016 LinkedIn Corp. (pinot-core@linkedin.com)
@@ -180,17 +179,17 @@
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpmime</artifactId>
-        <version>4.5.3</version>
+        <version>4.2.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
-        <version>4.5.3</version>
+        <version>4.2.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpcore</artifactId>
-        <version>4.4.6</version>
+        <version>4.2.5</version>
       </dependency>
       <dependency>
         <groupId>com.linkedin.pinot</groupId>
@@ -352,6 +351,11 @@
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-compress</artifactId>
         <version>1.9</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>4.1.3</version>
       </dependency>
       <dependency>
         <groupId>org.apache.thrift</groupId>
@@ -638,44 +642,9 @@
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-csv</artifactId>
-        <version>1.0</version>
-      </dependency>
-      <dependency>
         <groupId>org.apache.hadoop</groupId>
         <artifactId>hadoop-common</artifactId>
         <version>${hadoop.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.h2database</groupId>
-        <artifactId>h2</artifactId>
-        <version>1.4.193</version>
-      </dependency>
-      <dependency>
-        <groupId>com.github.jnr</groupId>
-        <artifactId>jnr-posix</artifactId>
-        <version>3.0.12</version>
-      </dependency>
-      <dependency>
-        <groupId>org.openjdk.jmh</groupId>
-        <artifactId>jmh-generator-annprocess</artifactId>
-        <version>1.8</version>
-      </dependency>
-      <dependency>
-        <groupId>org.openjdk.jmh</groupId>
-        <artifactId>jmh-core</artifactId>
-        <version>1.15</version>
-      </dependency>
-      <dependency>
-        <groupId>args4j</groupId>
-        <artifactId>args4j</artifactId>
-        <version>2.32</version>
-      </dependency>
-      <dependency>
-        <groupId>org.glassfish.tyrus.bundles</groupId>
-        <artifactId>tyrus-standalone-client</artifactId>
-        <version>1.5</version>
       </dependency>
     </dependencies>
 
@@ -954,10 +923,8 @@
         <configuration>
           <shadedArtifactAttached>true</shadedArtifactAttached>
           <transformers>
-            <transformer
-                implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-            <transformer
-                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+            <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
               <mainClass>${mainClass}</mainClass>
             </transformer>
           </transformers>
@@ -974,7 +941,21 @@
           </filters>
         </configuration>
       </plugin>
-    </plugins>
+    <plugin>
+                <groupId>edu.illinois</groupId>
+                <artifactId>starts-maven-plugin</artifactId>
+                <version>1.3</version>
+                <executions>
+                    <execution>
+                        <id>starts</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>starts</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
   </build>
   <reporting>
     <plugins>
@@ -1024,3 +1005,4 @@
     </plugins>
   </reporting>
 </project>
+
